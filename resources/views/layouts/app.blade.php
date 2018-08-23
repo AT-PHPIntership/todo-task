@@ -9,7 +9,7 @@
   <body>
     <div class="container">
       <nav class="navbar navbar-default">
-        <!-- <a href="/">Login</a> -->
+        <a href="/">Sign in</a>
         <!-- <a href="/register">Register</a> -->
       </nav>
     </div>
