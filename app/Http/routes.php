@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/', 'LoginController@index');
+Route::get('/', 'AuthController@loginView');
 
-Route::get('/register', 'RegisterController@index');
+Route::get('/register', 'AuthController@registerview');
+
+Route::post('/login', 'AuthController@login');
+Route::post('/account/create', 'AuthController@register');
