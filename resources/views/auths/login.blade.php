@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
-  <section class="login-section">
+  <section class="login-section d-flex" style="height: 100vh">
     @include('common.errors')
     <form action="/login" method="post" class="form-horizontal col-md-4 m-auto">
     <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}" />

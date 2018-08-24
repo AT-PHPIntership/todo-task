@@ -7,17 +7,6 @@
   </head>
 
   <body>
-    <div class="container">
-      <nav class="navbar navbar-default">
-        <a href="/" onclick="logout()">Logout</a>
-      </nav>
-    </div>
     @yield('content')
   </body>
-
-  <script>
-    function logout() {
-      document.cookie = 'user_id' + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    }
-  </script>
 </html>
