@@ -9,6 +9,7 @@ use App\Task;
 use App\Tag;
 use App\TagTask;
 use App\UserTask;
+use Session;
 use DB;
 // use Cookie;
 class TaskController extends Controller
@@ -84,5 +85,13 @@ class TaskController extends Controller
       // show notify and redirect
       echo  'add task success';
     }
+  }
+
+  public function delete(Request $request)
+  {
+    $task = Task::find($request->id);
+    $task->delete();
+    Session::flash('message', 'Successfully deleted the task!');
+    return redirect('/tasks');
   }
 }

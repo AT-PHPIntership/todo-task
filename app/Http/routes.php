@@ -12,10 +12,15 @@
 */
 
 Route::get('/', 'AuthController@loginView');
+
 Route::get('/task/create', 'TaskController@create');
 
+Route::post('/task/delete', 'TaskController@delete');
+
 Route::resource('/tasks', 'TaskController');
+
 Route::get('/register', 'AuthController@registerview');
 
 Route::post('/login', 'AuthController@login');
+
 Route::post('/account/create', 'AuthController@register');

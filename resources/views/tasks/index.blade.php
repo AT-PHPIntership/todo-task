@@ -37,9 +37,9 @@
             <td>
                 <!-- TODO: Delete Button -->
               <!-- <a href="{{ url('task/'.$task->id) }}">Delete</a> -->
-              <form action="{{ url('task/'.$task->task_id) }}" method="POST">
+              <form action="{{ url('task/delete') }}" method="POST">
                 {{ csrf_field() }}
-                {{ method_field('DELETE') }}
+                <input type="hidden" name="id" value="{{$task->task_id}}">
                 <button type="submit" class="btn btn-danger">
                   <i class="fa fa-trash"></i> Delete
                 </button>
