@@ -15,7 +15,8 @@
 
         <!-- Table Headings -->
         <thead>
-          <th>Task name</th>
+        <th>Task name</th>
+        <th>Hash tag</th>
           <th>&nbsp;</th>
         </thead>
 
@@ -26,6 +27,12 @@
             <!-- Task Name -->
             <td class="table-text">
               <div>{{ $task->name }}</div>
+            </td>
+            <td class="table-text">
+            <!-- a foreach to dis play all task 's -->
+              <div>
+                <span>#{{ $task->tags }}</span>
+              </div>
             </td>
             <td>
                 <!-- TODO: Delete Button -->
