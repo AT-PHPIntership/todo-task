@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
-  <section class="register-section">
+  <section class="register-section d-flex" style="height: 100vh">
     @include('common.errors')
-    <form action="/account/create" method="post" class="col-md-4 m-auto">
+    <form action="/account/create" method="post" class="col-md-4 m-auto align-middle">
     <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}" />
       <div class="form-group">
         <label for="name" class="control-label">Fullname:</label>
@@ -22,6 +22,7 @@
         <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
       </div>
       <button type="submit" class="btn btn-primary col-md-12">Sign up</button>
+      <a href="/"><input type="button" class="btn btn-default col-md-12 mt-3" value="Cancel"></a>
     </form>
   </section>
 @endsection
