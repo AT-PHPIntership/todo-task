@@ -1,31 +1,48 @@
 @extends('layouts.app')
 
 @section('content')
-  <h1>Todo Tasks</h1>
-  <div>
-    <strong>Currently ignore user login !!</strong>
-  <!-- will detele it later -->
-    <form method="POST" action="{{action('TaskController@store')}}">
+<div>
+  <a href="{{ url('task/create')}}">Create new task</a>
+</div>
+@if (count($tasks) > 0)
+  <div class="panel panel-default">
+    <div class="panel-heading">
+        Current Tasks
+    </div>
 
-      <input type="hidden" name="_token" value="{{ csrf_token() }}">
-      <label for="name">Task name:</label>
-      <input type="text" name="name">
-      <label for="tags">Tags:</label>
-      <textarea name="tags" id="tags" cols="30" rows="3"></textarea>
-      <input type="submit" value="Add Task">
-    </form>
+    <div class="panel-body">
+      <table class="table table-striped task-table">
+
+        <!-- Table Headings -->
+        <thead>
+          <th>Task name</th>
+          <th>&nbsp;</th>
+        </thead>
+
+        <!-- Table Body -->
+        <tbody>
+          @foreach ($tasks as $task)
+          <tr>
+            <!-- Task Name -->
+            <td class="table-text">
+              <div>{{ $task->name }}</div>
+            </td>
+            <td>
+                <!-- TODO: Delete Button -->
+              <!-- <a href="{{ url('task/'.$task->id) }}">Delete</a> -->
+              <form action="{{ url('task/'.$task->task_id) }}" method="POST">
+                {{ csrf_field() }}
+                {{ method_field('DELETE') }}
+                <button type="submit" class="btn btn-danger">
+                  <i class="fa fa-trash"></i> Delete
+                </button>
+              </form>
+            </td>
+          </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
   </div>
-  <div>
-  @if ($tasks)
-    <h2>Task List</h2>
-    <ul>
-      @foreach ($tasks as $task)
-      <li>{{$task->name}}</li>
-      <input type="checkbox" id="{{$task->id}}">
-      <!--  -->
-      <a class="" href="{{ URL::to('task/' . $task->id) }}">Edit this sh!t</a>
-      @endforeach
-    </ul>
   @endif
-  </div>
 @endsection

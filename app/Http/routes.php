@@ -13,6 +13,10 @@
 
 Route::get('/', 'LoginController@index');
 
+Route::post('/login', 'LoginController@login');
+
 Route::get('/register', 'RegisterController@index');
+
+Route::get('/task/create', 'TaskController@create');
 
 Route::resource('/tasks', 'TaskController');
