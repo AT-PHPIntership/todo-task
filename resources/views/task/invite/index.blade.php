@@ -46,7 +46,7 @@
                             <td>{{$user['user_id']}}</td>
                             <td>{{$user['name']}}</td>
                             <td>
-                                <form action="{{action('TaskController@inviteDestroy', $user['user_id'])}}" method="post">
+                                <form action="{{action('TaskController@inviteDestroy', ['id' => $user['user_id']])}}" method="post">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input name="_method" type="hidden" value="DELETE">
                                     <button class="btn btn-danger" type="submit">Remove</button>

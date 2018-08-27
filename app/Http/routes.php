@@ -24,7 +24,9 @@ Route::get('tasks/{id}/invite', array('as'=>'tasks/invite', 'uses'=>'TaskControl
 
 Route::post('tasks/{id}/invite/create', array('as'=>'tasks/invite/create', 'uses'=>'TaskController@inviteCreate'));
 
-Route::get('tasks/{id}/invite/destroy', array('as'=>'tasks/invite/destroy', 'uses'=>'TaskController@inviteDestroy'));
+Route::post('tasks/{id}/invite/inviteDestroy', 'TaskController@inviteDestroy');
+
+// Route::post('tasks/{id}/invite/inviteDestroy', array('as'=>'tasks/invite/inviteDestroy', 'uses'=>'TaskController@inviteDestroy'));
 // Route::get('tasks/{id}/invite', function ($id) {
 //     return 'task/invite';
 // });

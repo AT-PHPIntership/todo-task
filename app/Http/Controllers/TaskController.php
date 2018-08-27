@@ -29,7 +29,7 @@ class TaskController extends Controller
         // $tasks = DB::select('select * from tasks where user_id = ?', [1]);
 
         $tasks = Task::select('*')
-                        ->where('user_id', '=' , $_COOKIE['user_id'])
+                        ->where('user_id', '=' , 1)
                         ->with('tags')
                         ->get();
         // dd($tasks);
@@ -80,7 +80,7 @@ class TaskController extends Controller
         $task = new \App\Task;
 
         $task->name = $request->get('name');
-        $task->user_id = $_COOKIE['user_id'];
+        $task->user_id = 1;
         $task->status = 0;
 
         $allTagObj = Tag::all();
@@ -249,7 +249,12 @@ class TaskController extends Controller
 
     public function inviteDestroy($id)
     {
-        $user_task = \App\UserTask::find($id);
+        dd($id);
+        // $user_task = \App\UserTask::find($id);
+        $user_task = UserTask::select('*')
+                                ->where('user_id', '=', $id)
+                                ->first();
+        // dd(count($user_task));
         $user_task->delete();
         return redirect("tasks/$id/invite")->with('success','Information has been deleted');
     }
