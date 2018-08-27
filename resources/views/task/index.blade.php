@@ -45,7 +45,7 @@
                     @endforeach
                 </tbody>
             </table>
-            <a href="{{action('TaskController@inviteCreate', ['id' => $task['task_id']])}}" class="btn btn-primary">Create</a>
+            <a href="{{action('TaskController@create')}}" class="btn btn-primary">Create</a>
         </div>
     </body>
 </html>
