@@ -1,8 +1,9 @@
 @extends('layouts.auth')
 
 @section('content')
-  <section class="register-section d-flex" style="height: 100vh">
-    @include('common.errors')
+
+  @include('common.errors')
+  <section class="register-section d-flex" style="margin-top: 100px;">
     <form action="/account/create" method="post" class="col-md-4 m-auto align-middle">
     <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}" />
       <div class="form-group">
