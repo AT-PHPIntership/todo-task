@@ -19,8 +19,8 @@ class CreateUserTasksTable extends Migration
             $table->boolean('status');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('user_id')->on('users');
-            $table->foreign('task_id')->references('task_id')->on('tasks');
+            // $table->foreign('user_id')->references('user_id')->on('users');
+            // $table->foreign('task_id')->references('task_id')->on('tasks');
         });
     }
 

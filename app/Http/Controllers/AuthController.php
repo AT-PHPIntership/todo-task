@@ -35,8 +35,9 @@ class AuthController extends Controller {
       foreach($checkLogin as $value) {
         if (Hash::check($password, $value->password)) {
           setcookie('user_id', $value->user_id, time() + 60 * 60 * 24);
-          echo "Login Successful! <br>";
-          echo "user_id: $value->user_id";
+          return redirect('/tasks');
+          // echo "Login Successful! <br>";
+          // echo "user_id: $value->user_id";
         }
         else {
           $validator->errors()->add('email', 'Email or password are wrong, please type again!');
@@ -58,7 +59,7 @@ class AuthController extends Controller {
       'name' => 'required|max:255',
       'email' => 'required|email:true|unique:users',
       'password' => 'required|min:8|confirmed',
-      'password_confirmation' => 'required|min:8',
+      'password_confirmation' => 'required',
     ]);
     if ($validator->fails()) {
       return redirect('/register')
