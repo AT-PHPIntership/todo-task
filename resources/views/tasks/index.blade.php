@@ -17,12 +17,13 @@
         <thead>
         <th>Task name</th>
         <th>Hash tag</th>
+        <th>Done</th>
           <th>&nbsp;</th>
         </thead>
 
         <!-- Table Body -->
         <tbody>
-          @foreach ($tasks as $task)
+          <?php foreach ($tasks as $task): ?>
           <tr>
             <!-- Task Name -->
             <td class="table-text">
@@ -31,8 +32,21 @@
             <td class="table-text">
             <!-- a foreach to dis play all task 's -->
               <div>
-                <span>#{{ $task->tags }}</span>
+                <!-- <span>{{ $task->tags }}</span> -->
+                <span>
+                  <?php foreach ($task->tags as $tag): ?>
+                    <!-- <a href="">#{{$tag->name}}</a> -->
+                    #{{$tag->name}}
+                  <?php endforeach; ?>
+                </span>
               </div>
+            </td>
+            <td>
+              @if ($task->status)
+              <input type="checkbox" name="status" id="status" checked>
+              @else
+              <input type="checkbox" name="status" id="status">
+              @endif
             </td>
             <td>
                 <!-- TODO: Delete Button -->
@@ -46,7 +60,7 @@
               </form>
             </td>
           </tr>
-          @endforeach
+          <?php endforeach; ?>
         </tbody>
       </table>
     </div>

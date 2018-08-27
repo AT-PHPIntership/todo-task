@@ -11,43 +11,30 @@ use App\TagTask;
 use App\UserTask;
 use Session;
 use DB;
-// use Cookie;
 class TaskController extends Controller
 {
   public function index() {
     $user_id = $_COOKIE['user_id'];
-    // $tasks = Task::select('*')->where('user_id', $user_id)->get();
-    // $tasks = DB::table('tag_tasks')
-    //             ->join('tasks', 'tasks.task_id', '=', 'tag_tasks.task_id')
-    //             ->join('tags', 'tag_tasks.tag_id', '=', 'tags.tag_id')
-    //             ->select('tasks.name', 'tasks.status', 'tags.name')
-    //             ->where('user_id', $user_id)->get();
 
     $tasks = Task::select('*')
     ->where('user_id', '=' , $user_id)
     ->with('tags')
     ->get();
     // dd($tasks);
-    $tasksData = [];
-    foreach ($tasks as $task) {
-      $tagList = '';
-      foreach ($task->tags as $tag) {
-        $tagList .= $tag->name .',';
-      }
-      $task->tags = $tagList;
-      array_push($tasksData, $task);
-    }
-    // foreach ($tasksData as $tas) {
-    // dd($tas);
+    // $tasksData = [];
+    // foreach ($tasks as $task) {
+    //   $tagList = '';
+    //   // $taskLength = $task->length;
+    //   foreach ($task->tags as $key=>$tag) {
+    //     $tagList .='#'. $tag->name;
+    //     if ($key < count($task->tags) - 1) {
+    //       $tagList .=', ';
+    //     }
+    //   }
+    //   $task->tags = $tagList;
+    //   array_push($tasksData, $task);
     // }
-    // echo '<pre>';
-
-    // dd($tasks->first());
-    // foreach($tasks as $task) {
-    //   dd($task->tags->first()->name);
-    // }
-  // dd($tasks->first());
-    return view('tasks.index')->with('tasks', $tasksData);
+    return view('tasks.index')->with('tasks', $tasks);
   }
 
   public function create() {
@@ -60,7 +47,12 @@ class TaskController extends Controller
 
     $allTagObj = Tag::all();
     $newTagStr = $request->tags;
+    $newTagStr = str_replace(' ', '', $newTagStr);
     $newTagArr = explode(',', $newTagStr);
+    $newTagArr = array_unique($newTagArr);
+    if (!end($newTagArr)) {
+      array_pop($newTagArr);
+    }
     $task->name = $request->name;
     $task->user_id = $_COOKIE['user_id'];
     $task->save();
@@ -82,8 +74,8 @@ class TaskController extends Controller
       );
     }
     if (count($tag_task)>0) {
-      // show notify and redirect
-      echo  'add task success';
+      Session::flash('message', 'Successfully add the task!');
+      return redirect('/tasks');
     }
   }
 
